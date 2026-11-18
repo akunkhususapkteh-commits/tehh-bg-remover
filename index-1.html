@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101114">
+<title>TEHH BG REMOVER — Hapus Background Gratis</title>
+<style>
+:root{color-scheme:dark;--bg:#101114;--panel:#191b20;--line:#2b2e36;--orange:#ff8a24;--muted:#a6a8b0}
+*{box-sizing:border-box}html{min-height:100%;background:var(--bg)}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#392113 0,transparent 45%),var(--bg);color:#f7f7f8;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;min-height:100svh}
+.wrap{width:100%;max-width:520px;min-height:100vh;min-height:100svh;margin:0 auto;padding:clamp(18px,4vh,34px) 16px max(22px,env(safe-area-inset-bottom));display:flex;flex-direction:column;justify-content:center}.brand{text-align:center;margin-bottom:28px}.brand .mark{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:17px;background:linear-gradient(135deg,#ffb15c,#f36b12);color:#17120d;font-weight:1000;font-size:25px;box-shadow:0 8px 30px #ff8a2430}.brand h1{font-size:clamp(27px,5vw,42px);line-height:1.1;margin:14px 0 7px;letter-spacing:-1.5px}.brand h1 span{color:var(--orange)}.brand p{color:var(--muted);margin:0}
+.panel{background:#191b20;border:1px solid var(--line);border-radius:24px;padding:clamp(16px,4vw,30px);box-shadow:0 22px 70px #0005}
+.upload{border:2px dashed #48434a;border-radius:18px;min-height:220px;display:grid;place-items:center;text-align:center;padding:25px;cursor:pointer;transition:.2s;background:#15161a}.upload:hover,.upload.drag{border-color:var(--orange);background:#211a15}.upload .ico{font-size:42px}.upload h2{font-size:20px;margin:8px 0 3px}.upload p{color:var(--muted);margin:0 0 15px;font-size:14px}.btn{border:0;border-radius:12px;padding:12px 18px;background:var(--orange);color:#1b130c;font-weight:800;cursor:pointer;font-size:15px}.btn:disabled{opacity:.45;cursor:not-allowed}.subtle{color:var(--muted);font-size:12px;margin-top:12px}
+#file{display:none}.work{display:none;margin-top:22px}.preview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.preview figure{margin:0;min-width:0}.preview figcaption{font-size:13px;color:var(--muted);margin:0 0 8px}.imagebox{height:300px;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;place-items:center;background-color:#222;background-image:linear-gradient(45deg,#2d2d2d 25%,transparent 25%),linear-gradient(-45deg,#2d2d2d 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#2d2d2d 75%),linear-gradient(-45deg,transparent 75%,#2d2d2d 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}.imagebox img{max-width:100%;max-height:100%;object-fit:contain}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.actions .btn.secondary{background:#292c34;color:#fff;border:1px solid #41444d}.status{margin-top:16px;color:#ffc18a;font-size:14px;min-height:22px}.progress{height:7px;border-radius:10px;background:#30323a;overflow:hidden;margin-top:9px;display:none}.progress span{display:block;height:100%;width:0;background:var(--orange);transition:width .3s}.note{margin:20px 4px 0;color:#92949c;font-size:12px;text-align:center}
+@media(max-width:600px){
+ .wrap{max-width:none;min-height:100vh;min-height:100svh;padding:18px 14px max(20px,env(safe-area-inset-bottom));justify-content:flex-start}
+ .brand{margin:4px 0 20px}.brand .mark{width:48px;height:48px;border-radius:15px}
+ .brand h1{font-size:clamp(25px,8vw,34px);margin:10px 0 5px}
+ .brand p{font-size:13px}
+ .panel{padding:14px;border-radius:20px}
+ .upload{min-height:190px;padding:18px 12px}
+ .upload h2{font-size:18px}
+ .preview{grid-template-columns:1fr;gap:12px}
+ .imagebox{height:clamp(170px,28vh,240px)}
+ .actions{display:grid;grid-template-columns:1fr 1fr}
+ .actions .btn{padding:12px 10px;font-size:14px}
+ .actions #remove{grid-column:1/-1}
+ .note{font-size:11px;margin-top:14px}
+}
+@media(max-height:700px) and (max-width:600px){
+ .wrap{justify-content:flex-start;padding-top:10px}
+ .brand{margin-bottom:12px}
+ .brand .mark{width:40px;height:40px;font-size:21px}
+ .brand h1{font-size:25px;margin:7px 0 3px}
+ .upload{min-height:150px}
+ .imagebox{height:150px}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="brand"><div class="mark">T</div><h1>TEHH <span>BG REMOVER</span></h1><p>Hapus latar belakang foto dengan mudah — gratis.</p></header>
+<section class="panel">
+<label class="upload" id="dropzone" for="file">
+  <div><div class="ico">🖼️</div><h2>Pilih foto kamu</h2><p>Seret foto ke sini atau pilih dari perangkat</p><button class="btn" type="button" id="pick">Pilih Foto</button><div class="subtle">JPG, PNG, atau WEBP • Gratis digunakan</div></div>
+</label>
+<input id="file" type="file" accept="image/png,image/jpeg,image/webp">
+<div class="work" id="work">
+ <div class="preview">
+  <figure><figcaption>Foto asli</figcaption><div class="imagebox"><img id="original" alt="Foto asli"></div></figure>
+  <figure><figcaption>Hasil tanpa background</figcaption><div class="imagebox"><img id="result" alt="Hasil transparan"></div></figure>
+ </div>
+ <div class="status" id="status" aria-live="polite">Siap memproses foto.</div><div class="progress" id="progress"><span id="bar"></span></div>
+ <div class="actions"><button class="btn" id="remove">Hapus Background</button><button class="btn" id="download" disabled>⬇ Download PNG</button><button class="btn secondary" id="reset">Pilih Foto Lain</button></div>
+</div>
+</section>
+<p class="note">Mesin AI pihak ketiga memproses foto secara online. Gratis hingga 10 foto per hari per alamat IP. Foto dikirim ke layanan pemroses untuk menghasilkan PNG transparan. <a href="https://bgninja.com" target="_blank" rel="noopener" style="color:#ffad65">Background removal by BGNinja</a>.</p>
+</main>
+<script type="module">
+const $=s=>document.querySelector(s);
+const fileInput=$('#file'), zone=$('#dropzone'), work=$('#work');
+let sourceFile=null, outputUrl=null;
+const say=t=>$('#status').textContent=t;
+function setProgress(v){$('#progress').style.display='block';$('#bar').style.width=v+'%'}
+function clearResult(){if(outputUrl)URL.revokeObjectURL(outputUrl);outputUrl=null;$('#result').removeAttribute('src');$('#download').disabled=true;$('#bar').style.width='0%';$('#progress').style.display='none'}
+function choose(file){
+ if(!file)return;
+ if(!['image/png','image/jpeg','image/webp'].includes(file.type)){say('Format belum didukung. Gunakan JPG, PNG, atau WEBP.');return}
+ if(file.size>15*1024*1024){say('Ukuran foto maksimal 15 MB.');return}
+ sourceFile=file;clearResult();$('#original').src=URL.createObjectURL(file);work.style.display='block';say('Foto siap. Tekan “Hapus Background”.');
+}
+fileInput.addEventListener('change',e=>choose(e.target.files[0]));
+$('#pick').addEventListener('click',e=>{e.preventDefault();fileInput.click()});
+zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag')});
+zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag');choose(e.dataTransfer.files[0])});
+$('#reset').addEventListener('click',()=>{fileInput.value='';sourceFile=null;clearResult();work.style.display='none';say('')});
+$('#remove').addEventListener('click',async()=>{
+ if(!sourceFile)return;
+ const button=$('#remove');
+ button.disabled=true;$('#download').disabled=true;clearResult();
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),120000);
+ try{
+  say('Mengirim foto ke mesin AI…');
+  setProgress(12);
+  const body=new FormData();
+  body.append('file',sourceFile,sourceFile.name||'foto.jpg');
+  body.append('src','tehh-bg-remover');
+  say('AI sedang memproses foto di server. Biasanya tidak perlu mengunduh model besar ke HP.');
+  setProgress(35);
+  const response=await fetch('https://bgninja.com/api/remove',{
+    method:'POST',body,signal:controller.signal
+  });
+  if(!response.ok){
+    let detail='Server gagal memproses foto (HTTP '+response.status+').';
+    try{const data=await response.json();detail=data.error||data.detail||detail}catch{}
+    if(response.status===402)detail='Kuota gratis layanan AI hari ini sudah habis (10 foto per hari). Coba lagi besok.';
+    if(response.status===429)detail='Server sedang memproses terlalu banyak foto. Tunggu sebentar lalu coba lagi.';
+    if(response.status===413)detail='Ukuran atau resolusi foto terlalu besar. Coba foto yang lebih kecil.';
+    if(response.status===400)detail='File foto tidak terbaca. Coba simpan ulang sebagai JPG atau PNG.';
+    throw new Error(detail);
+  }
+  const blob=await response.blob();
+  if(!blob.size||(!blob.type.includes('image') && blob.size<1000))throw new Error('Server tidak mengirim hasil gambar yang valid. Silakan coba lagi.');
+  outputUrl=URL.createObjectURL(blob);
+  const img=$('#result');
+  img.onload=()=>{setProgress(100);say('Berhasil! Background sudah dihapus. Tekan Download PNG.');$('#download').disabled=false;};
+  img.onerror=()=>{clearResult();say('Hasil dari server tidak dapat dibuka. Silakan coba lagi.');};
+  img.src=outputUrl;
+  setProgress(85);
+ }catch(err){
+  console.error(err);
+  say(err.name==='AbortError'?'Waktu proses habis. Coba foto yang lebih kecil atau ulangi beberapa saat lagi.':(err.message||'Tidak dapat terhubung ke layanan AI. Periksa koneksi lalu coba lagi.'));
+  $('#progress').style.display='none';
+ }finally{
+  clearTimeout(timeout);
+  button.disabled=false;
+ }
+});
+$('#download').addEventListener('click',()=>{if(!outputUrl)return;const a=document.createElement('a');a.href=outputUrl;a.download='tehh-bg-remover.png';document.body.appendChild(a);a.click();a.remove()});
+</script>
+</body>
+</html>
